@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: cybervault-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: cybervault
+      POSTGRES_USER: cybervault
+      POSTGRES_PASSWORD: cybervault_secret_2024
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cybervault"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cybervault-app
+    restart: unless-stopped
+    ports:
+      - "3333:3333"
+    environment:
+      DATABASE_URL: postgres://cybervault:cybervault_secret_2024@db:5432/cybervault
+      NODE_ENV: production
+    depends_on:
+      db:
+        condition: service_healthy
