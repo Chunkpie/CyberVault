@@ -29,7 +29,7 @@ export default function ChecklistsPage() {
   const [expandedId, setExpandedId] = useState<string | null>(null)
   const [newItemText, setNewItemText] = useState('')
   const [newTitle, setNewTitle] = useState('')
-  const [showNewForm, setShowNewForm] = useState(false)
+  const [showNewForm, setShowNewForm] =+ useState(false)
 
   const fetchChecklists = useCallback(async () => {
     try {
