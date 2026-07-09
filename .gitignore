@@ -23,3 +23,4 @@ postgres-data
 pgdata
 coverage
 .vscode
+node_modules
