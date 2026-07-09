@@ -1,25 +1,34 @@
 # CyberVault
 
-A secure knowledge management platform for cybersecurity professionals. Built with Next.js 15, TypeScript, and Tailwind CSS.
+CyberVault is a secure operational platform for cybersecurity teams. It brings together pentest engagements, vulnerability tracking, note management, payload libraries, reconnaissance workflows, and reporting tools in a single Next.js application.
 
-![CyberVault](https://img.shields.io/badge/Version-1.0.0-black?style=flat-square) ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js) ![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?style=flat-square&logo=typescript) ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js) ![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?style=flat-square&logo=typescript) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?style=flat-square&logo=postgresql) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-sky?style=flat-square&logo=tailwindcss)
+
+## Overview
+
+CyberVault is designed to help red teams, security operations teams, and penetration testers manage assessment workflows, collaborate on findings, and retain knowledge in a structured, searchable system.
+
+### Core capabilities
+
+- Engagement tracking with target scope, status, and checklists
+- Vulnerability lifecycle management with CVSS, CWE, and OWASP alignment
+- Secure note-taking with tagging, pinning, soft delete, and archive support
+- Payload library with categorized commands and copy-to-clipboard actions
+- Recon workspace for organized reconnaissance data and quick reference
+- Report creation and export powered by Markdown editing
+- Bookmark management, screenshot storage, and reusable templates
+- Command palette for fast navigation and action execution
 
 ## Features
 
-- **Notes** - Rich text editor with TipTap, tags, pinning, and auto-save
-- **Engagements** - Manage pentest engagements with targets, scope, and checklists
-- **Vulnerability Tracking** - Full vuln lifecycle with CVSS scoring, CWE/OWASP mapping
-- **Payload Library** - Organized payload database with categories and copy-to-clipboard
-- **Tool Reference** - Command reference with one-click copy
-- **Checklists** - Interactive checklists with progress tracking
-- **Reports** - Markdown-based report editor with export
-- **CVE Tracking** - Track and monitor CVEs with NVD integration
-- **Bookmarks** - Save and organize security resources
-- **Screenshots** - Screenshot management with fullscreen viewer
-- **Templates** - Reusable templates for notes, checklists, and reports
-- **Recon Workspace** - Organize reconnaissance data by type and engagement
-- **Archive** - Soft-delete and restore functionality
-- **Command Palette** - Quick navigation with `Ctrl+K`
+- Rich text notes with TipTap editor support
+- Engagements with scope, objectives, and issue tracking
+- Vulnerability records with severity, references, and remediation details
+- Payloads and tools library for red team workflows
+- CVE tracking and vulnerability monitoring support
+- Checklists for operational progress and validation
+- Archive and restore for soft-deleted items
+- Full PostgreSQL data storage with Next.js API routes
 
 ## Tech Stack
 
@@ -28,68 +37,65 @@ A secure knowledge management platform for cybersecurity professionals. Built wi
 | Framework | Next.js 15 (App Router) |
 | Language | TypeScript 5.7 |
 | Styling | Tailwind CSS 3.4 |
-| UI Components | Radix UI + Custom shadcn/ui |
+| UI | Radix UI + custom components |
 | Rich Text | TipTap |
 | Database | PostgreSQL 16 |
-| Icons | Lucide React |
 | Charts | Recharts |
+| Icons | Lucide React |
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ (recommended: 20)
-- PostgreSQL 16+ (or use Docker)
+- Node.js 18 or newer
+- PostgreSQL 16 or newer
 - npm, yarn, or pnpm
+- Docker (optional)
 
-### Installation
+### Local setup
 
-1. **Clone the repository**
+1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/cybervault.git
-cd cybervault
+git clone https://github.com/Chunkpie/CyberVault.git
+cd CyberVault
 ```
 
-2. **Install dependencies**
+2. Install dependencies
 
 ```bash
 npm install
 ```
 
-3. **Set up environment variables**
-
-Create a `.env.local` file:
+3. Create `.env.local`
 
 ```env
-DATABASE_URL=postgresql://cybervault:cybervault_secret_2024@localhost:5432/cybervault
+DATABASE_URL=postgresql://<username>:<password>@localhost:5432/cybervault
 ```
 
-4. **Initialize the database**
+4. Initialize the database
 
 ```bash
 npm run db:init
 ```
 
-5. **Start the development server**
+5. Start development server
 
 ```bash
 npm run dev
 ```
 
-The app will be available at **http://localhost:3333**
+Open the app at **http://localhost:3333**.
 
-### Docker Setup
+### Docker setup
 
-1. **Start with Docker Compose**
+1. Start services
 
 ```bash
 docker compose up -d
 ```
 
-This will start both PostgreSQL and the CyberVault app.
-
-2. **Initialize the database**
+2. Initialize the database
 
 ```bash
 docker compose exec app node scripts/init-db.js
@@ -100,53 +106,15 @@ docker compose exec app node scripts/init-db.js
 ```
 CyberVault/
 ├── public/                    # Static assets
-├── scripts/
-│   ├── docker-init.js         # Docker initialization
-│   ├── init-db.js             # Database initialization
-│   └── schema.sql             # Database schema
+├── scripts/                   # Setup and database utilities
+│   ├── docker-init.js
+│   ├── init-db.js
+│   └── schema.sql
 ├── src/
-│   ├── app/
-│   │   ├── api/               # API routes
-│   │   │   ├── bookmarks/
-│   │   │   ├── checklists/
-│   │   │   ├── cves/
-│   │   │   ├── engagements/
-│   │   │   ├── notes/
-│   │   │   ├── payloads/
-│   │   │   ├── recon/
-│   │   │   ├── reports/
-│   │   │   ├── screenshots/
-│   │   │   ├── stats/
-│   │   │   ├── templates/
-│   │   │   ├── tools/
-│   │   │   └── vulnerabilities/
-│   │   ├── archive/
-│   │   ├── bookmarks/
-│   │   ├── checklists/
-│   │   ├── cves/
-│   │   ├── engagements/
-│   │   ├── notes/
-│   │   ├── payloads/
-│   │   ├── recon/
-│   │   ├── reports/
-│   │   ├── screenshots/
-│   │   ├── settings/
-│   │   ├── templates/
-│   │   ├── tools/
-│   │   ├── vulnerabilities/
-│   │   ├── globals.css
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-│   ├── components/
-│   │   ├── dashboard/
-│   │   ├── editor/
-│   │   ├── layout/
-│   │   └── ui/
-│   ├── lib/
-│   │   ├── db.ts
-│   │   └── utils.ts
-│   └── types/
-│       └── index.ts
+│   ├── app/                   # Next.js pages and API routes
+│   ├── components/            # Reusable UI components
+│   ├── lib/                   # Database and utility modules
+│   └── types/                 # TypeScript type definitions
 ├── docker-compose.yml
 ├── Dockerfile
 ├── next.config.js
@@ -159,104 +127,29 @@ CyberVault/
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start development server on port 3333 |
-| `npm run build` | Build for production |
-| `npm start` | Start production server on port 3333 |
-| `npm run lint` | Run ESLint |
-| `npm run db:init` | Initialize PostgreSQL database |
+| `npm run dev` | Start the development server |
+| `npm run build` | Build the production app |
+| `npm start` | Run the production build |
+| `npm run lint` | Run ESLint checks |
+| `npm run db:init` | Initialize the PostgreSQL database |
 
-## Keyboard Shortcuts
+## Environment Variables
 
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl+K` | Open command palette |
-| `Ctrl+N` | Create new note |
-| `Ctrl+E` | Create new engagement |
+Create a `.env.local` file with your PostgreSQL connection:
 
-## Configuration
-
-### Port
-
-The app runs on port **3333** by default. To change it:
-
-1. Update `package.json` scripts:
-   ```json
-   "dev": "next dev --port YOUR_PORT",
-   "start": "next start --port YOUR_PORT"
-   ```
-
-2. Update `Dockerfile`:
-   ```dockerfile
-   EXPOSE YOUR_PORT
-   ENV PORT=YOUR_PORT
-   ```
-
-3. Update `docker-compose.yml`:
-   ```yaml
-   ports:
-     - "YOUR_PORT:YOUR_PORT"
-   ```
-
-### Database
-
-Default PostgreSQL credentials:
-
-| Field | Value |
-|-------|-------|
-| Host | localhost |
-| Port | 5432 |
-| Database | cybervault |
-| User | cybervault |
-| Password | cybervault_secret_2024 |
-
-> **Note:** Change these credentials before deploying to production.
-
-## Deployment
-
-### Vercel
-
-1. Push to GitHub
-2. Import repository on Vercel
-3. Add PostgreSQL database (e.g., Neon, Supabase)
-4. Set `DATABASE_URL` environment variable
-5. Deploy
-
-### Docker
-
-```bash
-# Build and start
-docker compose up -d --build
-
-# View logs
-docker compose logs -f
-
-# Stop
-docker compose down
+```env
+DATABASE_URL=postgresql://<user>:<password>@localhost:5432/<database>
 ```
 
 ## Contributing
 
+Contributions are welcome. To contribute:
+
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Submit a pull request with a clear summary of changes
 
-## Security
+## Notes
 
-- All data is stored locally in PostgreSQL
-- No external analytics or tracking
-- No telemetry data collection
-- Designed for offline-first usage
-
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
-## Acknowledgments
-
-- [Next.js](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Radix UI](https://www.radix-ui.com/)
-- [TipTap](https://tiptap.dev/)
-- [Lucide Icons](https://lucide.dev/)
+- Ensure PostgreSQL is running before launching the app.
+- Configure `.env.local` with valid database credentials.
