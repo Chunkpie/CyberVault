@@ -5,10 +5,15 @@ out
 build
 dist
 .git
-.env*
+# Local environment files
 .env.local
 .env.development
 .env.production
+.env.test
+
+# Example environment file should be tracked
+!.env.example
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
